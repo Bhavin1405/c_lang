@@ -1,0 +1,737 @@
+#include<stdio.h>
+#include<conio.h>
+void main(){
+int i,arr[100],size,key,left=0,mid=0,right=0;
+clrscr();
+	printf("Enter size:");
+	scanf("%d",&size);
+	for(i=0;i<size;i++){
+		printf("\nenter arr[%d]",i);
+		scanf("%d",&arr[i]);
+	}
+	printf("\nEnter Key:");
+	scanf("%d",&key);
+	left=0;
+	right=size-1;
+	i=0;
+	while(i<size-1){
+		mid=(left+right)/2;
+		if(arr[mid]==key){
+			printf("\nElement found at pos %d",mid+1);
+			getch();
+			exit(0);
+		}
+		else if(arr[mid]>key){
+			left=mid+1;
+		}
+		else {
+			right=mid-1;
+		}
+		i++;
+	}
+		printf("\nElement Not Found");
+	getch();
+}
+
+
+/*#include<stdio.h>
+#include<conio.h>
+void main(){
+int i,arr[100],size,key;
+clrscr();
+	printf("Enter size:");
+	scanf("%d",&size);
+	for(i=0;i<size;i++){
+		printf("\nenter arr[%d]",i);
+		scanf("%d",&arr[i]);
+	}
+	printf("\nEnter Key:");
+	scanf("%d",&key);
+	for(i=0;i<size;i++){
+		if(arr[i]==key)
+			break;
+	}
+	if(i==size){
+		printf("\nKey Not Found");
+	}
+	else
+		printf("\nKey found at position %d",i+1);
+	getch();
+} */
+
+/*#include<stdio.h>
+#include<conio.h>
+struct node{
+	int data;
+	struct node* next;
+	struct node* prev;
+}*head,*newnode,*temp;
+void main(){
+	int choice;
+	clrscr();
+	while(choice){
+		newnode=(struct node*)malloc(sizeof(struct node));
+		printf("\nEnter Data:");
+		scanf("%d",&newnode->data);
+		newnode->next=NULL;
+		newnode->prev=NULL;
+		if(head==NULL){
+			head=temp=newnode;
+		}
+		else{
+			temp->next=newnode;
+			newnode->prev=temp;
+			temp=newnode;
+		}
+		printf("\nEnter choice:");
+		scanf("%d",&choice);
+	}
+	temp=head;
+	while(temp->next!=NULL){
+ //		printf("\n\t\t\t\t%d",temp->data);
+		temp=temp->next;
+	}
+	while(temp!=NULL){
+		printf("\n\t\t\t\t%d",temp->data);
+		temp=temp->prev;
+	}
+getch();
+} */
+
+/*#include<stdio.h>
+#include<conio.h>
+struct node{
+	int data;
+	struct node* next;
+}*head,*temp,*newnode;
+void create(){
+	int choice;
+	while(choice){
+		newnode=(struct node*)malloc(sizeof(struct node));
+		printf("\nEnter Data:");
+		scanf("%d",&newnode->data);
+		newnode->next=NULL;
+		if(head==NULL){
+			head=temp=newnode;
+		}
+		else{
+			temp->next=newnode;
+			temp=newnode;
+		}
+		printf("\nEnter Choice to create node:");
+		scanf("%d",&choice);
+	}
+}
+void display(){
+	temp=head;
+		if(head==NULL){
+			printf("\n\t\t\tEmpty");
+		}
+		else{
+			while(temp!=NULL){
+				printf("\n\t\t\t%d",temp->data);
+				temp=temp->next;
+			}
+		}
+}
+void ins_beg(){
+	newnode=(struct node*)malloc(sizeof(struct node));
+	printf("\nEnter Data:");
+	scanf("%d",&newnode->data);
+	newnode->next=NULL;
+	if(head==NULL){
+		head=newnode;
+	}
+	else{
+		newnode->next=head;
+		head=newnode;
+	}
+}
+void ins_end(){
+	newnode=(struct node*)malloc(sizeof(struct node));
+	printf("\nEnter Data:");
+	scanf("%d",&newnode->data);
+	newnode->next=NULL;
+	if(head==NULL){
+		head=newnode;
+	}
+	else{
+		temp=head;
+		while(temp->next!=NULL){
+			temp=temp->next;
+		}
+		temp->next=newnode;
+	}
+}
+int ins_pos(){
+int position,i=1;
+	if(head==NULL){
+		printf("\nLinked List is Empty.Position Doesn't Exist");
+	}
+	else{
+		newnode=(struct node*)malloc(sizeof(struct node));
+		printf("\nEnter Data:");
+		scanf("%d",&newnode->data);
+		newnode->next=NULL;
+		printf("\nEnter Position:");
+		scanf("%d",&position);
+		temp=head;
+			while(i<position-1){
+				if(temp==NULL){
+					printf("Position Dosen't Exist");
+					return 0;
+				}
+				temp=temp->next;
+				i++;
+			}
+			newnode->next=temp->next;
+			temp->next=newnode;
+	}
+	return 0;
+}
+int ins_aft(){
+int position,i=1;
+	if(head==NULL){
+		printf("\nLinked List is Empty.Position Doesn't Exist");
+	}
+	else{
+		newnode=(struct node*)malloc(sizeof(struct node));
+		printf("\nEnter Data:");
+		scanf("%d",&newnode->data);
+		newnode->next=NULL;
+		printf("\nEnter Position:");
+		scanf("%d",&position);
+		temp=head;
+			while(i<position){
+				if(temp==NULL){
+					printf("Position Dosen't Exist");
+					return 0;
+				}
+				temp=temp->next;
+				i++;
+			}
+			newnode->next=temp->next;
+			temp->next=newnode;
+	}
+	return 0;
+}
+void dlt_beg(){
+	if(head==NULL){
+		printf("Linked List Doesn't Exist");
+	}
+	else{
+		temp=head;
+		head=head->next;
+		free(temp);
+	}
+}
+void dlt_end(){
+struct node *pre;
+	if(head==NULL){
+		printf("\nLinked List Doesn't Exist");
+	}
+	else{
+		temp=head;
+		while(temp->next!=NULL){
+			pre=temp;
+			temp=temp->next;
+		}
+			pre->next=NULL;
+			free(temp);
+	}
+}
+void dlt_pos(){
+int i=0,pos;
+struct node *pre;
+	if(head==NULL){
+		printf("\nLinked List Doesn't Exist");
+	}
+	else{
+		printf("\nEnter Position:");
+		scanf("%d",&pos);
+		temp=head;
+		while(i<pos-1){
+			pre=temp;
+			temp=temp->next;
+			i++;
+		}
+		pre->next=temp->next;
+		free(temp);
+	}
+}
+void dlt_aft(){
+int i=0,pos;
+struct node *pre;
+	if(head==NULL){
+		printf("\nLinked List Doesn't Exist");
+	}
+	else{
+		printf("\nEnter Position:");
+		scanf("%d",&pos);
+		temp=head;
+		while(i<pos){
+			pre=temp;
+			temp=temp->next;
+			i++;
+		}
+		pre->next=temp->next;
+		free(temp);
+	}
+}
+void main(){
+	int choice;
+	clrscr();
+	while(1){
+		printf("\n1. Create");
+		printf("\n2. Insert at Beginning");
+		printf("\n3. Insert at End");
+		printf("\n4. Insert at Position");
+		printf("\n5. Insert after Position");
+		printf("\n6. Delete at beginnig");
+		printf("\n7. Delete at end");
+		printf("\n8. Delete at position");
+		printf("\n9. Delete after Position");
+		printf("\n10. Display");
+		printf("\n11. Exit");
+		printf("\nEnter Your Choice:");
+		scanf("%d",&choice);
+		switch(choice){
+			case 1:
+				create();
+				break;
+			case 2:
+				ins_beg();
+				break;
+			case 3:
+				ins_end();
+				break;
+			case 4:
+				ins_pos();
+				break;
+			case 5:
+				ins_aft();
+				break;
+			case 6:
+				dlt_beg();
+				break;
+			case 7:
+				dlt_end();
+				break;
+			case 8:
+				dlt_pos();
+				break;
+			case 9:
+				dlt_aft();
+				break;
+			case 10:
+				display();
+				break;
+			case 11:
+				exit(0);
+			default:
+				printf("\nInvalid Option");
+		}
+	}
+} */
+
+/*#include<stdio.h>
+#include<conio.h>
+int queue[100],front=-1,rear=-1,size;
+void insert(){
+	int data;
+	if((rear+1)%size==front){
+		printf("\nOverflow");
+	}
+	else{
+		printf("\nEnter Data:");
+		scanf("%d",&data);
+		if(front==-1 && rear==-1){
+			front=rear=0;
+		}
+		else{
+			rear=(rear+1)%size;
+		}
+			queue[rear]=data;
+	}
+}
+void dlt(){
+	if(front==-1 && rear==-1){
+		printf("\nUnderflow");
+	}
+	else{
+		if(front==rear){
+			front=rear=-1;
+		}
+		else{
+			front=(front+1)%size;
+		}
+	}
+}
+void display(){
+	int temp=front;
+		if(front==-1 && rear==-1){
+			printf("\nUnderflow");
+		}
+		else{
+			if(front==0 && rear==0){
+				printf("\n\t\t%d",queue[front]);
+			}
+			else{
+				while(temp!=rear){
+					printf("\n\t\t%d",queue[temp]);
+					temp++;
+				}
+				printf("\n\t\t%d",queue[rear]);
+			}
+		}
+}
+void main(){
+	int choice;
+	clrscr();
+	printf("\nEnter Size of Queue:");
+	scanf("%d",&size);
+	while(1){
+		printf("\n1. Insert");
+		printf("\n2. Delete");
+		printf("\n3. Display");
+		printf("\n4. Exit");
+		printf("\nEnter Your Choice:");
+		scanf("%d",&choice);
+		switch(choice){
+			case 1:
+				insert();
+				break;
+			case 2:
+				dlt();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit(0);
+		}
+	}
+}*/
+
+/*#include<stdio.h>
+#include<conio.h>
+int queue[100],front=-1,rear=-1,size;
+void insert(){
+int item;
+	if(rear==size-1){
+		printf("\nOverflow");
+	}
+	else{
+		printf("\nEnter Data:");
+		scanf("%d",&item);
+		if(rear==-1 && front==-1){
+			rear=0;
+			front=0;
+		}
+		else{
+			rear++;
+		}
+		queue[rear]=item;
+	}
+}
+void dlt(){
+	if(front==-1 && rear==-1){
+		printf("\nQueue is empty");
+	}
+	else{
+		if(front==rear){
+			front=rear=-1;
+		}
+		else{
+			front++;
+		}
+	}
+}
+void display(){
+int temp=front;
+	if(front==-1 && rear==-1){
+		printf("\nQueue is Empty");
+	}
+	else{
+		while(temp<=rear){
+			printf("\n%d",queue[temp]);
+			temp++;
+		}
+	}
+}
+void main(){
+	int choice;
+	clrscr();
+	printf("\nEnter Size of Queue:");
+	scanf("%d",&size);
+	while(1){
+		printf("\n1. Insert");
+		printf("\n2. Delete");
+		printf("\n3. Display");
+		printf("\n4. Exit");
+		printf("\nEnter Choice:");
+		scanf("%d",&choice);
+		switch(choice){
+			case 1:
+				insert();
+				break;
+			case 2:
+				dlt();
+				break;
+			case 3:
+				display();
+				break;
+			case 4:
+				exit (0);
+			default:
+				printf("\nInvalid Option");
+		}
+	}
+} */
+
+/*#include<stdio.h>
+#include<conio.h>
+int stack[100],top=-1,size=0;
+void create(){
+	for(top=0;top<size;top++)
+	{
+		printf("Enter elemant[%d]",top);
+		scanf("%d",&stack[top]);
+	}
+	top--;
+}
+void display(){
+	int temp=top;
+	if(temp==-1){
+		printf("\nEmpty Stack");
+	}
+	else{
+		for(temp=top;temp>=0;temp--){
+			printf("\n%d",stack[temp]);
+		}
+	}
+}
+void push(){
+	int data;
+	if(top==size-1){
+		printf("\nOverflow");
+	}
+	else{
+		printf("Enter Data:");
+		scanf("%d",&data);
+		top++;
+		stack[top]=data;
+	}
+}
+void pop(){
+	if(top==-1){
+		printf("\nEmpty Stack");
+	}
+	else{
+		stack[top]=NULL;
+		top--;
+	}
+}
+void reverse(){
+	int temp;
+	if(top==-1){
+		printf("\nEmpty Stack");
+	}
+	else{
+		for(temp=0;temp<=top;temp++){
+			printf("\n%d",stack[temp]);
+		}
+	}
+}
+void main(){
+	int choice;
+	clrscr();
+	printf("\nEnter Size of Stack :");
+	scanf("%d",&size);
+	while(1){
+		printf("\n1. Create");
+		printf("\n2. Display");
+		printf("\n3. Push");
+		printf("\n4. Pop");
+		printf("\n5. Reverse");
+		printf("\n6. Exit");
+		printf("\nEnter Choice:");
+		scanf("%d",&choice);
+		switch(choice){
+			case 1:
+				create();
+				break;
+			case 2:
+				display();
+				break;
+			case 3:
+				push();
+				break;
+			case 4:
+				pop();
+				break;
+			case 5:
+				reverse();
+				break;
+			case 6:
+				exit (0);
+			default:
+				printf("Invalid Option");
+				break;
+		}
+	}
+} */
+
+
+/*#include<stdio.h>
+#include<conio.h>
+int arr[100],size=0;
+void create(){
+	int i;
+	printf("\nEnter Size Of Array :");
+	scanf("%d",&size);
+	printf("\n");
+	for(i=0;i<size;i++){
+		printf("Enter Element arr[%d]",i);
+		scanf("%d",&arr[i]);
+	}
+}
+void display(){
+	int i;
+	if(size==0){
+		printf("\nArray Doesn't Exist");
+	}
+	else{
+		printf("\nElements of Array :\n");
+		for(i=0;i<size;i++){
+			printf("\n%d",arr[i]);
+		}
+	}
+}
+void ins_beg(){
+	int item,i;
+	printf("Enter Data :");
+	scanf("%d",&item);
+	size++;
+		for(i=size-1;i>=0;i--){
+			arr[i]=arr[i-1];
+		}
+	arr[0]=item;
+}
+void ins_end(){
+	int item;
+	size++;
+	printf("Enter Data:");
+	scanf("%d",&item);
+	arr[size-1]=item;
+}
+void ins_pos(){
+	int item,position,i;
+	printf("Enter Data");
+	scanf("%d",&item);
+	if(size==0){
+		printf("\nArray doesn't Exist\nThe item will be inserted at 1st position");
+		size++;
+		arr[0]=item;
+	}
+	else{
+		printf("Enter Position :");
+		scanf("%d",&position);
+		size++;
+		for(i=size-1;i>=position-1;i--){
+			arr[i]=arr[i-1];
+		}
+		arr[position-1]=item;
+	}
+}
+void del_beg(){
+	int i;
+	if(size==0){
+		printf("\nArray Doesn't Exist");
+	}
+	else{
+		for(i=0;i<size;i++){
+			arr[i]=arr[i+1];
+		}
+		arr[size-1]=NULL;
+		size--;
+	}
+}
+void del_end(){
+	if(size==0){
+		printf("\nArray Doesn't Exist");
+	}
+	else{
+		arr[size-1]=NULL;
+		size--;
+	}
+}
+void del_pos(){
+	int i,position;
+	if(size==0){
+		printf("\nArray Doesn't Exist");
+	}
+	else{
+		printf("\nEnter Position:");
+		scanf("%d",&position);
+		if(position>size-1){
+			printf("\nPosition dosen't exist");
+		}
+		else{
+			for(i=position-1;i<size;i++){
+				arr[i]=arr[i+1];
+			}
+			arr[size-1]=NULL;
+			size--;
+		}
+	}
+}
+void main(){
+	int choice;
+	clrscr();
+	while(1){
+		printf("\n\n1. Create an array");
+		printf("\n2. Display");
+		printf("\n3. Insert At Beginning");
+		printf("\n4. Insert At End");
+		printf("\n5. Insert At Position");
+		printf("\n6. Delete At Beginning");
+		printf("\n7. Delete At End");
+		printf("\n8. Delete At Position");
+		printf("\n9. Exit");
+		printf("\nEnter Choice :");
+		scanf("%d",&choice);
+		printf("\n");
+		switch(choice){
+			case 1:
+				create();
+				break;
+			case 2:
+				display();
+				break;
+			case 3:
+				ins_beg();
+				break;
+			case 4:
+				ins_end();
+				break;
+			case 5:
+				ins_pos();
+				break;
+			case 6:
+				del_beg();
+				break;
+			case 7:
+				del_end();
+				break;
+			case 8:
+				del_pos();
+				break;
+			case 9:
+				exit(0);
+				break;
+			default:
+				printf("\nInvalid Option");
+		}
+	}
+}*/
